@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
     @user = User.find(1)
     raise Forbidden unless user_safe?
 
-    @skill_categories = @user.skills.map(&:skill_category).uniq
+    @skill_categories = @user.skills.preload(:skill_category).map(&:skill_category).uniq
     @articles = @user.articles
   end
 
